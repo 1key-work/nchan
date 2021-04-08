@@ -19,6 +19,4 @@ jobs:
         with:
           fetch-depth: 1
       
-      - run: |
-          docker build . && docker build -t 1key/nchan . 
-          docker push 1key/nchan
+      - run: ./build.sh
