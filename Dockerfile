@@ -25,7 +25,7 @@ ENV NCHAN_VERSION 1.2.7
 RUN wget "https://github.com/slact/nchan/archive/v${NCHAN_VERSION}.tar.gz" -O nchan.tar.gz
 RUN tar zxf nchan.tar.gz
 
-ENV NGINX_VERSION 1.19.1
+ENV NGINX_VERSION 1.19.8
 
 # retrieve nginx source
 RUN echo "deb-src https://nginx.org/packages/mainline/debian/ buster nginx" >> /etc/apt/sources.list.d/nginx.list
@@ -53,7 +53,7 @@ RUN mv objs/ngx_http_brotli_static_module.so ${MODULES_DIR}
 ##
 ## release
 ##
-FROM nginx:1.19.1
+FROM nginx:1.19.8
 
 ENV MODULES_DIR /usr/local/nginx/modules
 
@@ -66,7 +66,4 @@ COPY --from=builder \
 COPY --from=builder \
   ${MODULES_DIR}/ngx_http_brotli_static_module.so ${MODULES_DIR}
 
-RUN echo "$(echo -e "load_module ${MODULES_DIR}/ngx_http_brotli_static_module.so;\nload_module ${MODULES_DIR}/ngx_http_brotli_filter_module.so;\nload_module ${MODULES_DIR}/ngx_nchan_module.so;\n" | cat - /etc/nginx/nginx.conf )"> /etc/nginx/nginx.conf
-
-#RUN mv /tmp/nginx.conf /etc/nginx/nginx.conf
-#COPY ./conf.d/default.conf /etc/nginx/conf.d/
+COPY ./nginx.conf /etc/nginx/
