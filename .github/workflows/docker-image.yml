@@ -14,5 +14,20 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag 1key/nchan:$(date +%s)
+    - name: Docker Images Build And Push
+      # You may pin to the exact commit or the version.
+      # uses: risfeng/docker-image-build-push-action@cb2810d0b48aeef5fec933dee19b595319c80e1d
+      uses: risfeng/docker-image-build-push-action@v1.0
+      with:
+        # Docker Registry Url, eg: registry.xxxxx.cs.com
+        registry_url: hub.docker.com
+        # Docker Image Namespaces, eg: adotcode
+        namespaces: 1key
+        # Docker Image Repository Name, eg: adc.ms.eureka
+        repository_name: nchan
+        # Docker Login UserName, from: https://cr.console..com/
+        user_name: ${{ secrets.DOCKER_USER }}
+        # Docker Login Password, from: https://cr.console..com/
+        password: ${{ secrets.DOCKER_PASSWORD }}
+        # Image Build Version
+        image_version: latest
