@@ -67,3 +67,4 @@ COPY --from=builder \
   ${MODULES_DIR}/ngx_http_brotli_static_module.so ${MODULES_DIR}
 
 COPY ./nginx.conf /etc/nginx/
+CMD nginx
