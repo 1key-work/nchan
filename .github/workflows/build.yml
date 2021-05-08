@@ -13,6 +13,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:   
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 1
+          
       - uses: azure/docker-login@v1
         with:
           username: ${{ secrets.DOCKER_USER }}
