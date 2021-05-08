@@ -53,6 +53,7 @@ RUN mv objs/ngx_http_brotli_static_module.so ${MODULES_DIR}
 ##
 ## release
 ##
+
 FROM nginx:1.19.8
 
 ENV MODULES_DIR /usr/local/nginx/modules
